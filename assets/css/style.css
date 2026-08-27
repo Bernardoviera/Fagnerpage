@@ -42,6 +42,43 @@ body {
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Textura sutil de grão — tira a chapadez do preto sólido, quase imperceptível. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Glow ambiente alternado por seção — evita a parede preta plana entre blocos. */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(45% 60% at 90% 0%, rgba(201, 162, 39, 0.07), transparent 70%);
+}
+
+section:nth-of-type(even)::before {
+  background: radial-gradient(45% 60% at 8% 100%, rgba(201, 162, 39, 0.06), transparent 70%);
+}
+
+section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 img {
@@ -95,6 +132,37 @@ p {
   width: 28px;
   height: 1px;
   background: var(--gold);
+}
+
+/* ---------- Icons ---------- */
+.icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-lg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.5;
+}
+
+.icon-circle {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ---------- Nav ---------- */
@@ -245,11 +313,36 @@ p {
   margin-bottom: 22px;
 }
 
+.badge .icon {
+  width: 16px;
+  height: 16px;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 30px;
+}
+
+/* Faixa de credenciais/badges abaixo do lede do hero */
+.credential-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 6px;
+}
+
+.credential-row .badge {
+  margin-bottom: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-strong);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.credential-row .badge .icon {
+  color: var(--gold-light);
 }
 
 /* ---------- Stat strip ---------- */
@@ -259,17 +352,22 @@ p {
 }
 
 .stat-strip .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  padding-top: 34px;
-  padding-bottom: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .stat {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 34px -28px rgba(0, 0, 0, 0.6);
 }
 
 .stat .num {
@@ -277,12 +375,13 @@ p {
   font-size: 2.4rem;
   color: var(--gold);
   font-weight: 700;
+  line-height: 1;
 }
 
 .stat .desc {
   color: var(--text-muted);
-  font-size: 0.94rem;
-  max-width: 220px;
+  font-size: 0.9rem;
+  max-width: 260px;
 }
 
 /* ---------- Sections ---------- */
@@ -307,8 +406,40 @@ section + section {
   max-width: 760px;
 }
 
+/* Chips — resume pontos-chave do texto acima em formato escaneável */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.chip .icon-circle {
+  width: 30px;
+  height: 30px;
+}
+
+.chip .icon {
+  width: 15px;
+  height: 15px;
+}
+
 /* Pull quote / philosophy */
 .pull-quote {
+  position: relative;
   font-family: var(--serif);
   font-style: italic;
   font-size: clamp(1.3rem, 2.6vw, 1.8rem);
@@ -318,12 +449,25 @@ section + section {
   margin: 0 0 32px;
 }
 
+.pull-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -14px;
+  left: -4px;
+  font-family: var(--serif);
+  font-size: 4.5rem;
+  color: var(--gold-dim);
+  line-height: 1;
+  pointer-events: none;
+}
+
 .quote-block {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 40px 44px;
   position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 40px -28px rgba(0, 0, 0, 0.65);
 }
 
 .quote-block::before {
@@ -368,22 +512,35 @@ section + section {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 32px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 40px -28px rgba(0, 0, 0, 0.65);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   border-color: var(--border-strong);
   transform: translateY(-3px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 28px 46px -24px rgba(0, 0, 0, 0.7);
+}
+
+.card .pillar-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.card .pillar-badge .icon-circle {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #14120a;
 }
 
 .card .pillar-num {
   font-family: var(--serif);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
-  color: var(--gold);
+  color: var(--gold-light);
   text-transform: uppercase;
-  margin-bottom: 14px;
-  display: block;
 }
 
 .card h3 {
@@ -404,6 +561,19 @@ section + section {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 40px -28px rgba(0, 0, 0, 0.65);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+}
+
+.offer-card .offer-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .offer-card .offer-tag {
@@ -442,6 +612,13 @@ section + section {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 30px -26px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.check-list li:hover {
+  border-color: var(--border-strong);
+  transform: translateX(3px);
 }
 
 .check-list .mark {
@@ -519,6 +696,7 @@ section + section {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--bg-card);
+  box-shadow: 0 24px 40px -28px rgba(0, 0, 0, 0.65);
 }
 
 .proof-item img {
@@ -587,6 +765,7 @@ footer .foot-cred {
   .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .proof-gallery { grid-template-columns: 1fr; }
+  .stat-strip .container { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {
