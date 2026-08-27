@@ -291,6 +291,7 @@ p {
   font-size: 2.4rem;
   color: var(--gold-light);
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .hero-price .label {
@@ -323,6 +324,70 @@ p {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 30px;
+}
+
+/* ---------- Hero: layout em 2 colunas (texto + painel de destaque) ---------- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 34px 60px -30px rgba(0, 0, 0, 0.75);
+}
+
+.hero-panel .panel-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 600;
+}
+
+.hero-panel .stat {
+  box-shadow: none;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.hero-panel .stat + .stat {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-panel .hero-price {
+  margin: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.hero-panel .badge {
+  margin-bottom: 0;
+}
+
+.hero-panel .panel-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text);
+  border-left: 2px solid var(--gold);
+  padding-left: 14px;
+  margin: 0;
+}
+
+.hero-panel .btn {
+  margin-top: 4px;
 }
 
 /* Faixa de credenciais/badges abaixo do lede do hero */
@@ -394,8 +459,33 @@ section + section {
 }
 
 .section-head {
-  max-width: 680px;
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  max-width: 780px;
   margin-bottom: 44px;
+}
+
+.section-head .sec-num {
+  flex: none;
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 0.85;
+  color: rgba(230, 200, 92, 0.16);
+}
+
+.section-head-text {
+  min-width: 0;
+}
+
+.section-head-text .eyebrow {
+  margin-top: 6px;
+}
+
+/* Zebra: alterna o fundo das seções de conteúdo para quebrar a monotonia do preto */
+section:nth-of-type(even):not(.cta-band) {
+  background-color: var(--bg-alt);
 }
 
 .prose p {
@@ -689,6 +779,7 @@ section + section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  align-items: start;
 }
 
 .proof-item {
@@ -696,7 +787,26 @@ section + section {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--bg-card);
-  box-shadow: 0 24px 40px -28px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 30px 50px -28px rgba(0, 0, 0, 0.7);
+}
+
+.proof-item:nth-child(2) {
+  margin-top: 34px;
+}
+
+.proof-item .chrome-bar {
+  display: flex;
+  gap: 6px;
+  padding: 12px 14px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.proof-item .chrome-bar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .proof-item img {
@@ -765,7 +875,14 @@ footer .foot-cred {
   .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .proof-gallery { grid-template-columns: 1fr; }
+  .proof-item:nth-child(2) { margin-top: 0; }
   .stat-strip .container { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 640px) {
+  .section-head { gap: 14px; }
+  .section-head .sec-num { font-size: 2rem; }
 }
 
 @media (max-width: 720px) {
