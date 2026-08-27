@@ -577,19 +577,10 @@ footer .foot-cred {
 }
 
 /* ---------- Reveal on scroll ----------
-   Escondido só quando o JS confirma que vai revelar (classe no <html>
-   setada de forma síncrona antes do CSS aplicar). Sem JS, ou se o script
-   falhar, o conteúdo aparece normalmente — nunca fica preso em opacity:0. */
-html.has-js .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-html.has-js .reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+   Estado inicial e animação ficam a cargo do GSAP/ScrollTrigger (main.js),
+   que aplica autoAlpha/transform via inline style. Sem CSS aqui: se o
+   script falhar ao carregar, o conteúdo já nasce visível — nunca fica
+   preso em opacity:0. */
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
