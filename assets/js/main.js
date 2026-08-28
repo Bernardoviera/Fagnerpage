@@ -15,6 +15,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Formulário de lead da Mentoria: monta uma mensagem e abre o WhatsApp do Fagner.
+  const leadForm = document.querySelector("#mentoria-form");
+  if (leadForm) {
+    const WHATSAPP_NUMBER = "5500000000000"; // TODO: substituir pelo WhatsApp real do Fagner (DDI+DDD+número, só dígitos)
+
+    leadForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const nome = leadForm.nome.value.trim();
+      const whatsapp = leadForm.whatsapp.value.trim();
+      const engenharia = leadForm.engenharia.value.trim();
+      const regiao = leadForm.regiao.value.trim();
+
+      const lines = [
+        "Olá, Fagner! Quero saber mais sobre a Mentoria em Perícias Judiciais.",
+        `Nome: ${nome}`,
+        `WhatsApp: ${whatsapp}`,
+      ];
+      if (engenharia) lines.push(`Área de engenharia: ${engenharia}`);
+      if (regiao) lines.push(`Região: ${regiao}`);
+
+      const message = encodeURIComponent(lines.join("\n"));
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+    });
+  }
+
   if (typeof gsap === "undefined") return;
   if (typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
 

@@ -38,7 +38,7 @@
           45 dias de acompanhamento individual
         </span>
         <div class="hero-actions">
-          <a href="#checkout" class="btn btn-primary">Quero começar minha mentoria — R$ 1.500,00</a>
+          <a href="#checkout" class="btn btn-primary">Quero minha vaga — R$ 1.500,00</a>
         </div>
       </div>
       <div class="hero-media reveal">
@@ -156,9 +156,26 @@
   <section id="checkout" class="cta-band">
     <div class="container">
       <h2>45 dias para sair da fila e assinar sua primeira nomeação com segurança</h2>
-      <p>Acompanhamento individual, do diagnóstico do seu momento até a entrega do laudo.</p>
-      <!-- Substituir o href abaixo pelo link real de checkout (Hotmart / Kiwify / Eduzz, etc.) -->
-      <a href="#" class="btn btn-primary">Quero começar minha mentoria — R$ 1.500,00</a>
+      <p>Como é acompanhamento individual (x1), me conta um pouco sobre seu momento — eu te chamo no WhatsApp para alinharmos os próximos passos.</p>
+      <form id="mentoria-form" class="lead-form" novalidate>
+        <div class="form-row">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Seu nome" />
+        </div>
+        <div class="form-row">
+          <label for="whatsapp">WhatsApp (com DDD)</label>
+          <input type="tel" id="whatsapp" name="whatsapp" required autocomplete="tel" placeholder="(51) 99999-9999" />
+        </div>
+        <div class="form-row">
+          <label for="engenharia">Sua área de engenharia</label>
+          <input type="text" id="engenharia" name="engenharia" autocomplete="off" placeholder="Ex: civil, elétrica, mecânica..." />
+        </div>
+        <div class="form-row">
+          <label for="regiao">Cidade / região onde atua</label>
+          <input type="text" id="regiao" name="regiao" autocomplete="off" placeholder="Ex: Caxias do Sul - RS" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Quero falar com o Fagner no WhatsApp</button>
+      </form>
     </div>
   </section>
 
