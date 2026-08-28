@@ -345,32 +345,90 @@ p {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 34px 60px -30px rgba(0, 0, 0, 0.75);
 }
 
-.hero-panel .panel-photo {
-  width: calc(100% + 60px);
-  margin: -30px -30px 0;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  height: 240px;
-  object-fit: cover;
+/* ---------- Hero: foto grande em tela cheia + card flutuante ---------- */
+.hero-media {
+  position: relative;
+  align-self: stretch;
+  min-height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
 }
 
-.hero-panel .panel-id {
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 35%, rgba(8, 8, 9, 0.2) 58%, rgba(8, 8, 9, 0.92) 100%),
+    linear-gradient(120deg, rgba(8, 8, 9, 0.3), transparent 45%);
+}
+
+.hero-float {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1;
+  background: rgba(20, 19, 17, 0.55);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel-id {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  padding-top: 18px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.hero-panel .panel-id strong {
+.panel-id strong {
   font-family: var(--serif);
-  color: var(--text);
-  font-size: 1.05rem;
+  color: #fff;
+  font-size: 1.02rem;
 }
 
-.hero-panel .panel-id span {
-  color: var(--text-faint);
-  font-size: 0.85rem;
+.panel-id span {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
+}
+
+.float-stats {
+  display: flex;
+  gap: 22px;
+}
+
+.float-stats .num {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.float-stats .desc {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  max-width: 140px;
 }
 
 .hero-panel .panel-label {
@@ -906,6 +964,7 @@ footer .foot-cred {
   .proof-item:nth-child(2) { margin-top: 0; }
   .stat-strip .container { grid-template-columns: 1fr; }
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-media { min-height: 340px; }
 }
 
 @media (max-width: 640px) {
