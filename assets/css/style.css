@@ -1,6 +1,6 @@
 /* ===========================================================
    Fagner Mauer — Perito Judicial
-   Funil: index (carta) -> kit -> mentoria
+   Funil: index (carta) -> kit
    =========================================================== */
 
 :root {
@@ -923,53 +923,6 @@ section:nth-of-type(even):not(.cta-band) {
 .cta-band p {
   max-width: 520px;
   margin: 0 auto 32px;
-}
-
-/* ---------- Formulário de lead (mentoria -> WhatsApp) ---------- */
-.lead-form {
-  max-width: 460px;
-  margin: 0 auto;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-row label {
-  font-size: 0.83rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.form-row input {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 13px 16px;
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 0.98rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-row input::placeholder {
-  color: var(--text-faint);
-}
-
-.form-row input:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px var(--gold-dim);
-}
-
-.lead-form .btn {
-  margin-top: 6px;
 }
 
 /* ---------- Footer ---------- */
